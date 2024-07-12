@@ -14,6 +14,7 @@ class Api:
     def __init__(self) -> None:
         self.fsq_packet = FsqPacket(ver = FSQ_PROTOCOL_VERSION,
                                     error = FsqError(rc = 0, strerror = b''))
+        self.sock: socket.socket
         self.fpath_logging = None
         self.hostname_logging = None
 
@@ -242,7 +243,7 @@ class Api:
             logging.error('unexpected error: %s', e)
             raise
 
-    def close(self):
+    def close(self) -> None:
         """Close file on the FSQ server side.
 
         Sends FSQ_CLOSE packet to FSQ server and closes the data transfer.
@@ -287,7 +288,7 @@ class Api:
             logging.error('unexpected error: %s', e)
             raise
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         """Close communication socket with FSQ server
 
         Sends FSQ_DISCONNECT packet to FSQ server and closes the
