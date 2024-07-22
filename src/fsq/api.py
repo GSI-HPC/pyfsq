@@ -41,15 +41,12 @@ class Api:
 
     def __send(self, packed_data) -> None:
 
-        try:
-            bytes_sent = self.sock.send(packed_data)
+        bytes_sent = self.sock.send(packed_data)
 
-            if bytes_sent != len(packed_data):
-                logging.error('bytes_sent != len(packed_data)')
-                raise FsqProtocolError('incorrect packet length: bytes_sent != len(packed_data)')
+        if bytes_sent != len(packed_data):
+            logging.error('bytes_sent != len(packed_data)')
+            raise FsqProtocolError('incorrect packet length: bytes_sent != len(packed_data)')
 
-        except socket.error as e:
-            logging.error('socket error: %s', e)
 
     def connect(self, node: str, password: str, hostname: str, port: int) -> None:
         """Connect to FSQ server.
@@ -116,9 +113,11 @@ class Api:
 
         except FsqProtocolError as e:
             logging.error(e)
+            raise
 
         except FsqServerError as e:
             logging.error(e)
+            raise
 
         except Exception as e:
             logging.error('unexpected error: %s', e)
@@ -181,12 +180,15 @@ class Api:
 
         except socket.error as e:
             logging.error('socket error: %s', e)
+            raise
 
         except FsqProtocolError as e:
             logging.error(e)
+            raise
 
         except FsqServerError as e:
             logging.error(e)
+            raise
 
         except Exception as e:
             logging.error('unexpected error: %s', e)
@@ -235,9 +237,11 @@ class Api:
 
         except FsqProtocolError as e:
             logging.error(e)
+            raise
 
         except FsqServerError as e:
             logging.error(e)
+            raise
 
         except Exception as e:
             logging.error('unexpected error: %s', e)
@@ -280,9 +284,11 @@ class Api:
 
         except FsqProtocolError as e:
             logging.error(e)
+            raise
 
         except FsqServerError as e:
             logging.error(e)
+            raise
 
         except Exception as e:
             logging.error('unexpected error: %s', e)
@@ -320,9 +326,11 @@ class Api:
 
         except FsqProtocolError as e:
             logging.error(e)
+            raise
 
         except FsqServerError as e:
             logging.error(e)
+            raise
 
         except Exception as e:
             logging.error('unexpected error: %s', e)
