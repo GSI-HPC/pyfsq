@@ -52,7 +52,7 @@ if __name__ == "__main__":
     for filename in filenames:
 
         fpath = os.path.join(args.fpath, '', filename)
-        fsq.open(fs=args.fsname,fpath=fpath,desc='',dest=dest_choices[args.storagedest])
+        fsq.open(fs=args.fsname, fpath=fpath, desc='', dest=dest_choices[args.storagedest])
         file_size = os.path.getsize(filename)
 
         with open(filename, 'rb') as f:

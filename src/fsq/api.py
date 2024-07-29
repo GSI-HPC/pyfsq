@@ -12,18 +12,18 @@ class Api:
     """FSQ API class providing methods for transfering data to FSQ server."""
 
     def __init__(self) -> None:
-        self.fsq_packet = FsqPacket(ver = FSQ_PROTOCOL_VERSION,
-                                    error = FsqError(rc = 0, strerror = b''))
+        self.fsq_packet = FsqPacket(ver=FSQ_PROTOCOL_VERSION,
+                                    error=FsqError(rc=0, strerror=b''))
         self.sock: socket.socket
         self.fpath_logging = None
         self.hostname_logging = None
 
     def __verify_fsq_packet(self, data: tuple, state: FsqProtocolState) -> None:
 
-        fsq_packet = FsqPacket(ver = data[0],
-                               error = FsqError(rc = data[1],
-                                                strerror = data[2].decode('ascii').strip('\x00')),
-                               state = data[3])
+        fsq_packet = FsqPacket(ver=data[0],
+                               error=FsqError(rc=data[1],
+                                              strerror=data[2].decode('ascii').strip('\x00')),
+                               state=data[3])
 
         if fsq_packet.ver != FSQ_PROTOCOL_VERSION:
             raise FsqProtocolError(f'protocol error: unsupported FSQ protocol '
