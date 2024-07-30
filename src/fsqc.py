@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """FSQ console client for transfering data to FSQ server."""
 
 import logging
