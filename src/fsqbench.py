@@ -5,25 +5,11 @@
 import logging
 import argparse
 import os
-import random
-import string
 import threading
 import time
 from fsq.api import FSQ_PROTOCOL_VERSION
 from fsq.api import Api as FsqApi
-from fsq.api import FsqStorageDest
-
-DEST_CHOICES = {
-    'null': FsqStorageDest.FSQ_STORAGE_NULL,
-    'local': FsqStorageDest.FSQ_STORAGE_LOCAL,
-    'lustre': FsqStorageDest.FSQ_STORAGE_LUSTRE,
-    'tsm': FsqStorageDest.FSQ_STORAGE_TSM,
-    'lustre_tsm': FsqStorageDest.FSQ_STORAGE_LUSTRE_TSM,
-}
-
-def generate_random_str(length: int=32) -> str:
-    """Generate random string of letters and digits."""
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+from fsq.misc import DEST_CHOICES, generate_random_str
 
 def perform_task(i: int, timers: list[float], parser_args: argparse.Namespace) -> None:
     """Task to execute by each thread."""

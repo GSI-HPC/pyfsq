@@ -8,24 +8,16 @@ import glob
 import os
 from fsq.api import FSQ_PROTOCOL_VERSION
 from fsq.api import Api as FsqApi
-from fsq.api import FsqStorageDest
+from fsq.misc import DEST_CHOICES
 
 if __name__ == "__main__":
-    dest_choices = {
-        'null': FsqStorageDest.FSQ_STORAGE_NULL,
-        'local': FsqStorageDest.FSQ_STORAGE_LOCAL,
-        'lustre': FsqStorageDest.FSQ_STORAGE_LUSTRE,
-        'tsm': FsqStorageDest.FSQ_STORAGE_TSM,
-        'lustre_tsm': FsqStorageDest.FSQ_STORAGE_LUSTRE_TSM,
-    }
-
     parser = argparse.ArgumentParser(description=f'FSQ client for sending files '
                                      f'via FSQ protocol version {FSQ_PROTOCOL_VERSION}')
     parser.add_argument('-f', '--fsname', type=str, required=True,
                         help='filespace name (e.g /lustre)')
     parser.add_argument('-a', '--fpath', type=str, required=True,
                         help='file path (e.g /lustre/experiment/data)')
-    parser.add_argument('-o', '--storagedest', type=str, choices=dest_choices,
+    parser.add_argument('-o', '--storagedest', type=str, choices=DEST_CHOICES,
                         default='null', help='storage destination [default: null]')
     parser.add_argument('-n', '--node', type=str, required=True, help='TSM node name')
     parser.add_argument('-p', '--password', type=str, required=True, help='TSM password')
@@ -54,7 +46,7 @@ if __name__ == "__main__":
     for filename in filenames:
 
         fpath = os.path.join(args.fpath, '', filename)
-        fsq.open(fs=args.fsname, fpath=fpath, desc='', dest=dest_choices[args.storagedest])
+        fsq.open(fs=args.fsname, fpath=fpath, desc='', dest=DEST_CHOICES[args.storagedest])
         file_size = os.path.getsize(filename)
 
         with open(filename, 'rb') as f:
