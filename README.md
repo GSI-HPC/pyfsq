@@ -1,4 +1,4 @@
-# fsqpy
+# pyfsq
 Python-based FSQ API designed for transferring data to a FSQ server and
 simple console client for demonstrating how to use the API.
 
