@@ -39,15 +39,6 @@ class Api:
             raise FsqProtocolError(f'protocol error: received state {hex(fsq_packet.state)}, '
                                    f'expected state {hex(state)}')
 
-    def __send(self, packed_data) -> None:
-
-        bytes_sent = self.sock.send(packed_data)
-
-        if bytes_sent != len(packed_data):
-            logging.error('bytes_sent != len(packed_data)')
-            raise FsqProtocolError('incorrect packet length: bytes_sent != len(packed_data)')
-
-
     def connect(self, node: str, password: str, hostname: str, port: int) -> None:
         """Connect to FSQ server.
 
@@ -94,8 +85,8 @@ class Api:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect((hostent, port))
 
-            self.__send(fsq_packet_packed)
-            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH)
+            self.sock.sendall(fsq_packet_packed)
+            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH, socket.MSG_WAITALL)
             recv_unpacked = struct.unpack(PackUnpackFormat.CONNECT, recv_packed)
             self.__verify_fsq_packet(recv_unpacked,
                                      (FsqProtocolState.FSQ_CONNECT | FsqProtocolState.FSQ_REPLY))
@@ -169,8 +160,8 @@ class Api:
                                         self.fsq_packet.data.fsq_storage_dest)
 
         try:
-            self.__send(fsq_packet_packed)
-            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH)
+            self.sock.sendall(fsq_packet_packed)
+            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH, socket.MSG_WAITALL)
             recv_unpacked = struct.unpack(PackUnpackFormat.OPEN, recv_packed)
             self.__verify_fsq_packet(recv_unpacked,
                                      (FsqProtocolState.FSQ_OPEN | FsqProtocolState.FSQ_REPLY))
@@ -221,9 +212,9 @@ class Api:
                                         self.fsq_packet.data.size)
 
         try:
-            self.__send(fsq_packet_packed)
+            self.sock.sendall(fsq_packet_packed)
             self.sock.sendall(buf)
-            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH)
+            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH, socket.MSG_WAITALL)
             recv_unpacked = struct.unpack(PackUnpackFormat.DATA, recv_packed)
             self.__verify_fsq_packet(recv_unpacked,
                                      (FsqProtocolState.FSQ_DATA | FsqProtocolState.FSQ_REPLY))
@@ -270,8 +261,8 @@ class Api:
                                         self.fsq_packet.state)
 
         try:
-            self.__send(fsq_packet_packed)
-            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH)
+            self.sock.sendall(fsq_packet_packed)
+            recv_packed = self.sock.recv(FSQ_PACKET_LENGTH, socket.MSG_WAITALL)
             recv_unpacked = struct.unpack(PackUnpackFormat.CLOSE, recv_packed)
             self.__verify_fsq_packet(recv_unpacked,
                                      (FsqProtocolState.FSQ_CLOSE | FsqProtocolState.FSQ_REPLY))
@@ -315,7 +306,7 @@ class Api:
                                         self.fsq_packet.state)
 
         try:
-            self.__send(fsq_packet_packed)
+            self.sock.sendall(fsq_packet_packed)
             self.sock.close()
             logging.info('disconnect sucessfully from FSQ server %s', self.hostname_logging)
             logging.debug(self.fsq_packet)
