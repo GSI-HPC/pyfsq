@@ -171,8 +171,6 @@ class TestFsqApi(unittest.TestCase):
 
             self.assertEqual(self.fsqc.fsq_packet, fsq_packet_restored)
 
-    @unittest.skipIf(not hasattr(unittest.TestCase, 'with_data_write'),
-                     'Skipping test with data write')
     def test_data_write(self):
         fs = '/lustre'
         fpath = fs + '/fsqpy/test/'
