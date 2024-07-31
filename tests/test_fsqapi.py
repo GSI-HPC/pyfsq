@@ -1,4 +1,4 @@
-"""Suite for testing FSQ functionality."""
+"""Suite for testing FSQ API functionality."""
 
 import unittest
 import os
@@ -13,7 +13,6 @@ from fsq.struct import DSM_MAX_NODE_LENGTH, DSM_MAX_VERIFIER_LENGTH
 from fsq.struct import DSM_MAX_FSNAME_LENGTH, DSM_MAX_DESCR_LENGTH
 from fsq.struct import FSQ_MAX_ERRMSG_LENGTH, HOST_NAME_MAX, PATH_MAX
 from fsq.misc import generate_random_str
-
 
 NUM_REPETITIONS = 1000
 
