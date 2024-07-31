@@ -31,8 +31,7 @@ def perform_task(i: int, timers: list[float], parser_args: argparse.Namespace) -
 
     fsq.disconnect()
 
-if __name__ == "__main__":
-
+def main():
     parser = argparse.ArgumentParser(description=f'FSQ client for sending files '
                                      f'via FSQ protocol version {FSQ_PROTOCOL_VERSION}')
     parser.add_argument('-z', '--size', type=int, default=16777216,
@@ -74,3 +73,6 @@ if __name__ == "__main__":
     time_total = sum(results)
     print(f'total transmitted {size_total} bytes in {time_total:0.4f} '
           f'secs ({size_total / 1e9 / time_total:0.4f} Gbytes/secs)')
+
+if __name__ == "__main__":
+    main()

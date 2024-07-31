@@ -10,7 +10,7 @@ from fsq.api import FSQ_PROTOCOL_VERSION
 from fsq.api import Api as FsqApi
 from fsq.misc import DEST_CHOICES
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description=f'FSQ client for sending files '
                                      f'via FSQ protocol version {FSQ_PROTOCOL_VERSION}')
     parser.add_argument('-f', '--fsname', type=str, required=True,
@@ -55,3 +55,6 @@ if __name__ == "__main__":
         fsq.close()
 
     fsq.disconnect()
+
+if __name__ == "__main__":
+    main()
