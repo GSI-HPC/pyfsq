@@ -12,9 +12,10 @@ The FSQ protocol explanation and server/client written in C is provided at [http
 * Python >= 3.7
 
 ## Console Tools
+After installing the package, the console tools ```pyfsqc``` and ```pyfsqbench``` are available.
 ### FSQ Client
 ```bash
-python3 src/fsqc.py -f /lustre -a /lustre/fsqc -n polaris -p polaris -s localhost -v info src/fsqc.py
+$ pyfsqc -f /lustre -a /lustre/fsqc -n polaris -p polaris -s localhost -v info src/fsqc.py
 [2024-07-31 12:24:48,804 api.py:103 INFO] connect sucessfully to FSQ server localhost:7625
 [2024-07-31 12:24:48,804 api.py:178 INFO] opened sucessfully on FSQ server file /lustre/fsqc/src/fsqc.py
 [2024-07-31 12:24:48,847 api.py:230 INFO] send sucessfully 2471 bytes to file /lustre/fsqc/src/fsqc.py on FSQ server
@@ -23,7 +24,7 @@ python3 src/fsqc.py -f /lustre -a /lustre/fsqc -n polaris -p polaris -s localhos
 ```
 ### FSQ Benchmark Tool
 ```bash
-python3 src/fsqbench.py -t 2 -n polaris -p polaris -s localhost -v info
+$ pyfsqbench -t 2 -n polaris -p polaris -s localhost -v info
 [2024-07-31 12:26:59,098 api.py:103 INFO] connect sucessfully to FSQ server localhost:7625
 [2024-07-31 12:26:59,098 api.py:103 INFO] connect sucessfully to FSQ server localhost:7625
 [2024-07-31 12:26:59,129 api.py:178 INFO] opened sucessfully on FSQ server file /lustre/fsqbench/PN18OzXV5mccV3Wl5Gm0VQz7vO6YheH1
