@@ -2,7 +2,8 @@
 
 from dataclasses import dataclass, field
 from typing import Union
-from enum import IntEnum, IntFlag, StrEnum
+from enum import IntEnum, IntFlag
+from .strenum_compat import StrEnum
 
 FSQ_PROTOCOL_VERSION = 1
 FSQ_PACKET_LENGTH    = 6424
