@@ -7,11 +7,12 @@ import argparse
 import os
 import threading
 import time
+from typing import List
 from fsq.api import FSQ_PROTOCOL_VERSION
 from fsq.api import Api as FsqApi
 from fsq.misc import DEST_CHOICES, generate_random_str
 
-def perform_task(i: int, timers: list[float], parser_args: argparse.Namespace) -> None:
+def perform_task(i: int, timers: List[float], parser_args: argparse.Namespace) -> None:
     """Task to execute by each thread."""
     fsq = FsqApi()
     fsq.connect(node=parser_args.node, password=parser_args.password,
@@ -32,6 +33,7 @@ def perform_task(i: int, timers: list[float], parser_args: argparse.Namespace) -
     fsq.disconnect()
 
 def main():
+    """The main entry point of the application."""
     parser = argparse.ArgumentParser(description=f'FSQ client for sending files '
                                      f'via FSQ protocol version {FSQ_PROTOCOL_VERSION}')
     parser.add_argument('-z', '--size', type=int, default=16777216,
