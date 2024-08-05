@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pyfsq",
-    version="0.1.5",
+    version="0.1.6",
     author="Thomas Stibor",
     author_email="t.stibor@gsi.de",
     description="Python-based console client and API for transferring data to FSQ server",
