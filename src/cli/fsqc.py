@@ -11,6 +11,7 @@ from fsq.api import Api as FsqApi
 from fsq.misc import DEST_CHOICES
 
 def main():
+    """The main entry point of the application."""
     parser = argparse.ArgumentParser(description=f'FSQ client for sending files '
                                      f'via FSQ protocol version {FSQ_PROTOCOL_VERSION}')
     parser.add_argument('-f', '--fsname', type=str, required=True,
