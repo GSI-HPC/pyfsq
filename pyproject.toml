@@ -14,8 +14,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tstibor/pyfsq"
-Issues = "https://github.com/tstibor/pyfsq/issues"
+Homepage = "https://github.com/GSI-HPC/pyfsq"
+Issues = "https://github.com/GSI-HPC/pyfsq/issues"
 
 [build-system]
 requires = ["hatchling"]
