@@ -10,7 +10,7 @@ setup(
     description="Python-based console client and API for transferring data to FSQ server",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/tstibor/pyfsq",
+    url="https://github.com/GSI-HPC/pyfsq",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3.7",

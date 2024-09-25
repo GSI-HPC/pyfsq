@@ -2,7 +2,7 @@
 Python-based FSQ API designed for transferring data to a FSQ server and
 simple console client for demonstrating how to use the API.
 
-The FSQ protocol explanation and server/client written in C is provided at [https://github.com/tstibor/fsq](https://github.com/tstibor/fsq)
+The FSQ protocol explanation and server/client written in C is provided at [https://github.com/GSI-HPC/fsq](https://github.com/GSI-HPC/fsq)
 
 ## Installation
 ```pip3 install pyfsq```
