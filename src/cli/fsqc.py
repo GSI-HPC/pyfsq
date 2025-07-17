@@ -27,6 +27,8 @@ def main():
                                                               'warning', 'info', 'debug'],
                         default='info', help='verbose level [default: info]')
     parser.add_argument('files', nargs='+', help='files to send (use \'*\' to specify all files)')
+    parser.add_argument('-b', '--buffersize', type=int, default=16000000,
+            help='buffersize (in bytes) [default: 16 MB]')
     args = parser.parse_args()
 
     logging.basicConfig(level=getattr(logging, args.verbose.upper(), logging.INFO),
@@ -51,8 +53,14 @@ def main():
         file_size = os.path.getsize(filename)
 
         with open(filename, 'rb') as f:
-            file_data = f.read()
-            fsq.write(file_data, file_size)
+            bytes_read = 0
+            while bytes_read < file_size:
+                rest = file_size - bytes_read
+                buffer_size = args.buffersize if args.buffersize < rest else rest
+                file_data = f.read(buffer_size)
+                bytes_read += buffer_size
+                fsq.write(file_data, buffer_size)
+
         fsq.close()
 
     fsq.disconnect()
